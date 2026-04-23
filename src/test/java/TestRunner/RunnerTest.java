@@ -8,8 +8,10 @@ import org.junit.runner.RunWith;
 @CucumberOptions(
         features = "src/main/resources/features",
         glue = {"stepdefinitions","hooks"},
-        tags = "@headless",
-        plugin = {"pretty"},
+        tags = "@applyleave",
+        plugin = {"pretty",
+                "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"
+        },
         monochrome = true
 
 )
