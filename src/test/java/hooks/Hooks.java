@@ -1,5 +1,9 @@
 package hooks;
 
+import io.cucumber.java.AfterStep;
+import io.cucumber.java.Scenario;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 
 import io.cucumber.java.Before;
@@ -39,6 +43,17 @@ public class Hooks {
         loginpage.validatingWelcomePage();
 
         System.out.println("Browser opened");
+    }
+
+    @AfterStep
+    public void takeScreenshotAfterStep(Scenario scenario) {
+
+        if (driver != null) {
+            byte[] screenshot = ((TakesScreenshot) driver)
+                    .getScreenshotAs(OutputType.BYTES);
+
+            scenario.attach(screenshot, "image/png", "Step Screenshot");
+        }
     }
 
     @After
